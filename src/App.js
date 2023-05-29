@@ -10,8 +10,6 @@ function App() {
   const [products, setProducts] = useState([]);
   const [local, setLocal] = useState([]);
 
-  console.log(products);
-
   useEffect(() => {
     try {
       const getAllProduct = async () => {
@@ -34,13 +32,25 @@ function App() {
     if (getPokemonType) setLocal(getPokemonType);
   }, []);
 
+  const filterById = (idPr) => {
+    const listType = products
+      .filter((pokemon) => pokemon.id === idPr)
+      .map((item) => item.products);
+    console.log("listType", listType);
+  };
+  filterById(3);
   return (
     <>
       <AppBar />
 
       <Suspense>
         <Routes>
-          <Route path="/" element={<ListShops products={products} />} />
+          <Route
+            exact="true"
+            path="/"
+            element={<ListShops products={products} />}
+          />
+          <Route path="/:name" element={<h1>hello</h1>} />
         </Routes>
       </Suspense>
     </>
