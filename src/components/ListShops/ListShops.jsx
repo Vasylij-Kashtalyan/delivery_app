@@ -1,19 +1,35 @@
-import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ListShops = ({ products }) => {
-  const location = useLocation();
-  const { pathname } = useLocation();
+  const [idTarget, setIdTarget] = useState("");
 
-  console.log(products);
+  function onHahdler(evt) {
+    const idTarget = evt.currentTarget.id;
+    setIdTarget(idTarget);
+  }
+  const filterById = products
+    .filter((pokemon) => pokemon.id === Number(idTarget))
+    .map((item) => item.products);
 
-  return products.map(({ name, id }) => {
-    return (
-      <Link state={{ from: location }}>
-        {/* <button value={name} onClick={() => "hello"}> */}
-        <li key={id}>{name}</li>
-        {/* </button> */}
-      </Link>
-    );
-  });
+  return (
+    <>
+      {products.map(({ name, id }) => {
+        return (
+          <Link>
+            <button id={id} onClick={onHahdler}>
+              <li key={id}>{name}</li>
+            </button>
+          </Link>
+        );
+      })}
+
+      {idTarget &&
+        filterById[0].map(({ id, name }) => {
+          console.log("filterById", id, name);
+          return <li key={id}>{name}</li>;
+        })}
+    </>
+  );
 };
 export default ListShops;

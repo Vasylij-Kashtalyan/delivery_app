@@ -32,13 +32,6 @@ function App() {
     if (getPokemonType) setLocal(getPokemonType);
   }, []);
 
-  const filterById = (idPr) => {
-    const listType = products
-      .filter((pokemon) => pokemon.id === idPr)
-      .map((item) => item.products);
-    console.log("listType", listType);
-  };
-  filterById(3);
   return (
     <>
       <AppBar />
@@ -50,7 +43,7 @@ function App() {
             path="/"
             element={<ListShops products={products} />}
           />
-          <Route path="/:name" element={<h1>hello</h1>} />
+          <Route path="/:id" element={<h1>hello</h1>} />
         </Routes>
       </Suspense>
     </>
