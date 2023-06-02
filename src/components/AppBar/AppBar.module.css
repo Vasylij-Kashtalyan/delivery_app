@@ -7,3 +7,7 @@
   background-color: tomato;
   width: 100%;
 }
+
+.link {
+  text-decoration: none;
+}

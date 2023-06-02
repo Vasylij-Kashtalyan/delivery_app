@@ -1,8 +1,10 @@
 import { useState, useEffect, Suspense } from "react";
-import { fetchProduct } from "./api/api";
+import { fetchProduct, fetchProductById } from "./api/api";
 import AppBar from "./components/AppBar/AppBar";
 import ListShops from "./components/ListShops/ListShops";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Link, useParams } from "react-router-dom";
+import Basket from "../src/components/Basket/Basket";
+import { Container } from "./components/Container/Container";
 
 const LOCALSTORAGE_KEY_TYPE = "products";
 
@@ -14,6 +16,7 @@ function App() {
     try {
       const getAllProduct = async () => {
         const data = await fetchProduct();
+        console.log(data);
 
         setProducts(data);
         localStorage.setItem(LOCALSTORAGE_KEY_TYPE, JSON.stringify(data));
@@ -35,17 +38,18 @@ function App() {
   return (
     <>
       <AppBar />
-
-      <Suspense>
-        <Routes>
-          <Route
-            exact="true"
-            path="/"
-            element={<ListShops products={products} />}
-          />
-          <Route path="/:id" element={<h1>hello</h1>} />
-        </Routes>
-      </Suspense>
+      <Container>
+        <Suspense>
+          <Routes>
+            <Route
+              exact="true"
+              path="/"
+              element={<ListShops products={products} />}
+            />
+            <Route exact="true" path="/basket" element={<Basket />} />
+          </Routes>
+        </Suspense>
+      </Container>
     </>
   );
 }

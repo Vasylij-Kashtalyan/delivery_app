@@ -7,4 +7,9 @@ async function fetchProduct() {
   return response.data;
 }
 
-export { fetchProduct };
+async function fetchProductById(id) {
+  const response = await axios.get(`${BASE_URL}/api/products/${id}`);
+  return response.data;
+}
+
+export { fetchProduct, fetchProductById };
