@@ -5,6 +5,7 @@ import ListShops from "./components/ListShops/ListShops";
 import { Route, Routes, Link, useParams } from "react-router-dom";
 import Basket from "../src/components/Basket/Basket";
 import { Container } from "./components/Container/Container";
+import {Loader} from "./components/Loader/Loader"
 
 const LOCALSTORAGE_KEY_TYPE = "products";
 
@@ -26,7 +27,7 @@ function App() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  },[]);
 
   useEffect(() => {
     let getPokemonType = localStorage.getItem(LOCALSTORAGE_KEY_TYPE);
@@ -39,6 +40,7 @@ function App() {
     <>
       <AppBar />
       <Container>
+        {products.length === 0 && <Loader/>}
         <Suspense>
           <Routes>
             <Route
