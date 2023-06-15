@@ -7,7 +7,8 @@ import Basket from "../src/components/Basket/Basket";
 import { Container } from "./components/Container/Container";
 import {Loader} from "./components/Loader/Loader"
 
-const LOCALSTORAGE_KEY_TYPE = "products";
+const LOCALSTORAGE_KEY_TYPE = "choseProducts";
+
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -20,7 +21,7 @@ function App() {
         console.log(data);
 
         setProducts(data);
-        localStorage.setItem(LOCALSTORAGE_KEY_TYPE, JSON.stringify(data));
+        
       };
 
       getAllProduct();
@@ -29,12 +30,7 @@ function App() {
     }
   },[]);
 
-  useEffect(() => {
-    let getPokemonType = localStorage.getItem(LOCALSTORAGE_KEY_TYPE);
-    getPokemonType = JSON.parse(getPokemonType);
-
-    if (getPokemonType) setLocal(getPokemonType);
-  }, []);
+  
 
   return (
     <>
@@ -46,9 +42,9 @@ function App() {
             <Route
               exact="true"
               path="/"
-              element={<ListShops products={products} />}
+              element={<ListShops LOCALSTORAGE_KEY_TYPE={LOCALSTORAGE_KEY_TYPE} products={products} />}
             />
-            <Route exact="true" path="/basket" element={<Basket />} />
+            <Route exact="true" path="/basket" element={<Basket LOCALSTORAGE_KEY_TYPE={LOCALSTORAGE_KEY_TYPE} />} />
           </Routes>
         </Suspense>
       </Container>
