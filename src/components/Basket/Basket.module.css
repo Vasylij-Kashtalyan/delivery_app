@@ -4,6 +4,7 @@
     align-items: center;
   }
   .box_list {
+    height: 400px;
     text-align: center;
     margin-right: 20px;
     border-radius: 4px;

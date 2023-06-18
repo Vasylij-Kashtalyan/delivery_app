@@ -1,8 +1,8 @@
 import s from "./Basket.module.css"
 import { useEffect, useState } from "react";
 
-const Basket = ({LOCALSTORAGE_KEY_TYPE}) => {
-const [local,setLocal] = useState()
+const Basket = ({ LOCALSTORAGE_KEY_TYPE }) => {
+  const [local, setLocal] = useState([])
 
   useEffect(() => {
     let getProduct = localStorage.getItem(LOCALSTORAGE_KEY_TYPE);
@@ -10,22 +10,70 @@ const [local,setLocal] = useState()
 
     if (getProduct) setLocal(getProduct);
   }, []);
- 
+
   console.log("local", local)
 
   return (
     <div>
-      <h1>it`s your products</h1>
-      <ul className={s.box}>
-        {local &&
-          local.map(({ id, name,  }) => {
-            return (
-              <li className={s.box_list} key={id}>
-                <h3>{name}</h3>
-              </li>
-            );
-          })}
-      </ul>
+      {local.length === 0
+        ?
+        <div>
+
+          <h1>Кошик порожній</h1>
+          <p>Але це можливо виправити :)</p>
+        </div>
+
+        : <ul className={s.box}>
+          {local &&
+            local.map(item => {
+              return (
+                <li className={s.box_list} key={item.id}>
+                  <h3>{item.name}</h3>
+                  <img
+                    className={s.box.img}
+                    src={item.imageUrl}
+                    alt={item.name}
+                    loading="lazy"
+                  />
+                  <div>
+                    <p className={s.box_description}>
+                      {item.description}
+                    </p>
+                    <p className={s.box_price}>{item.price}</p>
+                  </div>
+                </li>
+              );
+            })}
+        </ul>}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
   );
 };
