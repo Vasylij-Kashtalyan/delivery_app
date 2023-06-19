@@ -1,7 +1,9 @@
 import s from "./AppBar.module.css";
 import { Link } from "react-router-dom";
+import imgShop from "../../img/icon-shopping.png"
 
-function AppBar() {
+
+function AppBar({ counterOrder }) {
   return (
     <header className={s.header}>
       <Link to="/" className={s.link}>
@@ -9,7 +11,11 @@ function AppBar() {
       </Link>
 
       <Link to="/basket" className={s.link}>
-        <h1>Basket</h1>
+        <div className={s.header_basket}>
+          <img src={imgShop} alt="shopping-cart" />
+          {counterOrder > 0 &&
+            <span>{counterOrder}</span>}
+        </div>
       </Link>
     </header>
   );

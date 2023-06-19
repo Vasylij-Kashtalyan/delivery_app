@@ -9,9 +9,8 @@ const Basket = ({ LOCALSTORAGE_KEY_TYPE }) => {
     getProduct = JSON.parse(getProduct);
 
     if (getProduct) setLocal(getProduct);
-  }, []);
+  }, [LOCALSTORAGE_KEY_TYPE]);
 
-  console.log("local", local)
 
   return (
     <div>
