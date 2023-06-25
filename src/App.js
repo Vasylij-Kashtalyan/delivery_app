@@ -1,97 +1,90 @@
 import { useState, useEffect, Suspense } from "react";
-import {
-  fetchProduct,
-} from "./api/api";
+import { fetchProduct } from "./api/api";
 import AppBar from "./components/AppBar/AppBar";
 import ListShops from "./components/ListShops/ListShops";
-import {
-  Route,
-  Routes,
-} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Basket from "../src/components/Basket/Basket";
 import { Container } from "./components/Container/Container";
-import {Loader} from "./components/Loader/Loader"
-
-const LOCALSTORAGE_KEY_TYPE = "choseProducts";
-
+import { Loader } from "./components/Loader/Loader";
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [orders, setOrders] = useState([]);
-  const [idTarget, setIdTarget] = useState("");
+    const [products, setProducts] = useState([]);
+    const [orders, setOrders] = useState([]);
+    const [idTarget, setIdTarget] = useState("");
 
-  const counterOrder = orders.length
+    const counterOrder = orders.length;
 
-  useEffect(() => {
-    try {
-      const getAllProduct = async () => {
-        const data = await fetchProduct();
+    useEffect(() => {
+        try {
+            const getAllProduct = async () => {
+                const data = await fetchProduct();
 
-        setProducts(data);
-      };
+                setProducts(data);
+            };
 
-      getAllProduct();
-    } catch (error) {
-      console.log(error);
+            getAllProduct();
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
+    function onHandler(evt) {
+        const idTarget = evt.currentTarget.id;
+        setIdTarget(idTarget);
     }
-  },[]);
 
-  function onHandler(evt) {
-    const idTarget = evt.currentTarget.id;
-    setIdTarget(idTarget);
-  }
+    const filterById = products
+        .filter((pokemon) => pokemon.id === Number(idTarget))
+        .map((item) => item.products)
+        .flat();
 
-  const filterById = products
-    .filter((pokemon) => pokemon.id === Number(idTarget))
-    .map((item) => item.products)
-    .flat();
+    function addBacket(item) {
+        let isInArray = false;
 
-  function addBacket(item) {
-    setOrders([...orders, item]);
-  }
+        orders.forEach((el) => {
+            if (el.id === item.id) isInArray = true;
+        });
 
-  localStorage.setItem(LOCALSTORAGE_KEY_TYPE, JSON.stringify(orders));
+        if (!isInArray) setOrders([...orders, item]);
+    }
 
-  return (
-    <>
-      < AppBar counterOrder = {
-        counterOrder
-      }
-      />
-      <Container>
-        {products.length === 0 && <Loader/>}
-        <Suspense>
-          <Routes>
-            <Route
-              exact="true"
-              path="/"
-              element = {
-                  <
-                  ListShops
+    function onDelete(id) {
+        const clear = orders.filter((product) => product.id !== id);
+        setOrders([...clear]);
+    }
 
-                  onHandler = {
-                    onHandler
-                  }
-                  idTarget = {
-                    idTarget
-                  }
-                  products = {
-                    products
-                  }
-                  filterById = {
-                    filterById
-                  }
-                  addBacket = {
-                    addBacket
-                  }
-                  />}
-            />
-            <Route exact="true" path="/basket" element={<Basket LOCALSTORAGE_KEY_TYPE={LOCALSTORAGE_KEY_TYPE} />} />
-          </Routes>
-        </Suspense>
-      </Container>
-    </>
-  );
+    return (
+        <>
+            <AppBar counterOrder={counterOrder} />
+            <Container>
+                {products.length === 0 && <Loader />}
+                <Suspense>
+                    <Routes>
+                        <Route
+                            exact="true"
+                            path="/"
+                            element={
+                                <ListShops
+                                    onHandler={onHandler}
+                                    idTarget={idTarget}
+                                    products={products}
+                                    filterById={filterById}
+                                    addBacket={addBacket}
+                                />
+                            }
+                        />
+                        <Route
+                            exact="true"
+                            path="/basket"
+                            element={
+                                <Basket onDelete={onDelete} orders={orders} />
+                            }
+                        />
+                    </Routes>
+                </Suspense>
+            </Container>
+        </>
+    );
 }
 
 export default App;

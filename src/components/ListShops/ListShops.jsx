@@ -2,7 +2,7 @@ import s from "./ListShops.module.css";
 
 const ListShops = ({ products, onHandler, idTarget, filterById, addBacket }) => {
     return (
-        <div>
+        <div className={s.container}>
             <ul className={s.box}>
                 {products.map(({ name, id }) => {
                     return (

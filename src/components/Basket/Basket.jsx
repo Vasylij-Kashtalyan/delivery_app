@@ -1,76 +1,62 @@
 import s from "./Basket.module.css"
-import { useEffect, useState } from "react";
 
-const Basket = ({ LOCALSTORAGE_KEY_TYPE }) => {
-  const [local, setLocal] = useState([])
-
-  useEffect(() => {
-    let getProduct = localStorage.getItem(LOCALSTORAGE_KEY_TYPE);
-    getProduct = JSON.parse(getProduct);
-
-    if (getProduct) setLocal(getProduct);
-  }, [LOCALSTORAGE_KEY_TYPE]);
-
-
+const Basket = ({ orders, onDelete }) => {
+  // function onHandleQuantity() {
+  // setValue(value + 1)
+  // }
   return (
-    <div>
-      {local.length === 0
-        ?
-        <div>
+    <div className={s.container}>
 
+      {orders.length === 0
+        ?
+        <div className={s.container_title}>
           <h1>Кошик порожній</h1>
           <p>Але це можливо виправити :)</p>
         </div>
 
-        : <ul className={s.box}>
-          {local &&
-            local.map(item => {
-              return (
-                <li className={s.box_list} key={item.id}>
-                  <h3>{item.name}</h3>
-                  <img
-                    className={s.box.img}
-                    src={item.imageUrl}
-                    alt={item.name}
-                    loading="lazy"
-                  />
-                  <div>
-                    <p className={s.box_description}>
-                      {item.description}
-                    </p>
-                    <p className={s.box_price}>{item.price}</p>
-                  </div>
-                </li>
-              );
-            })}
-        </ul>}
+        : <div>
+
+          <ul className={s.list}>
+            {orders &&
+              orders.map(({ id, name, imageUrl, description, price }) => {
+                return (
+                  <li className={s.list_item} key={id}>
+
+                    <div className={s.item_box}>
+
+                      <img
+                        className={s.box_img}
+                        src={imageUrl}
+                        alt={name}
+                        loading="lazy"
+                      />
 
 
+                      <p className={s.box_description}>
+                        {description}
+                      </p>
 
 
+                      <div className={s.item_box_btn}>
+                        <button type="button" onClick={() =>
+                          onDelete(id)}>Delete</button>
+                      </div>
+                    </div>
 
+                    <div className={s.item_price}>
+                      {/* <div> */}
+                      {/* <button type="button" onClick={() => onHandleQuantity()} >-</button> */}
+                      {/* <input type="number" min={0} value={1} max={99} step={1} /> */}
+                      {/* <button type="button" onClick={onHandleQuantity}>+</button> */}
+                      {/* </div> */}
+                      <p className={s.price}>{price}</p>
+                    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  </li>
+                );
+              })}
+          </ul>
+        </div>}
 
 
     </div>
