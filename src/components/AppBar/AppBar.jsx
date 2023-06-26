@@ -1,6 +1,6 @@
 import s from "./AppBar.module.css";
 import { Link } from "react-router-dom";
-import imgShop from "../../img/icon-shopping.png"
+import imgShop from "../../img/cart.svg"
 
 
 function AppBar({ counterOrder }) {

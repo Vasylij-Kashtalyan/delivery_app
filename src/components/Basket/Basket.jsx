@@ -1,9 +1,40 @@
 import s from "./Basket.module.css"
 
-const Basket = ({ orders, onDelete }) => {
-  // function onHandleQuantity() {
-  // setValue(value + 1)
-  // }
+const Basket = ({ orders, onDelete, setOrders }) => {
+
+  const onIncrement = (id) => {
+    setOrders(orders => {
+      return orders.map(product => {
+        if (product.id === id) {
+          return {
+            ...product,
+            counter: product.counter + 1,
+          }
+        }
+        return product;
+      })
+    })
+  }
+
+  const onDecrement = (id) => {
+    setOrders(orders => {
+      return orders.map(product => {
+        if (product.id === id) {
+
+          if (product.counter < 1) onDelete(product.id);
+
+          return {
+            ...product,
+            counter: product.counter - 1,
+          }
+        }
+
+        return product;
+      })
+    })
+  }
+
+
   return (
     <div className={s.container}>
 
@@ -18,44 +49,50 @@ const Basket = ({ orders, onDelete }) => {
 
           <ul className={s.list}>
             {orders &&
-              orders.map(({ id, name, imageUrl, description, price }) => {
+              orders.map(order => {
                 return (
-                  <li className={s.list_item} key={id}>
+                  <li className={s.list_item} key={order.id}>
 
                     <div className={s.item_box}>
 
                       <img
                         className={s.box_img}
-                        src={imageUrl}
-                        alt={name}
+                        src={order.imageUrl}
+                        alt={order.name}
                         loading="lazy"
                       />
 
 
                       <p className={s.box_description}>
-                        {description}
+                        {order.description}
                       </p>
 
 
                       <div className={s.item_box_btn}>
                         <button type="button" onClick={() =>
-                          onDelete(id)}>Delete</button>
+                          onDelete(order.id)}>Delete</button>
                       </div>
                     </div>
 
                     <div className={s.item_price}>
-                      {/* <div> */}
-                      {/* <button type="button" onClick={() => onHandleQuantity()} >-</button> */}
-                      {/* <input type="number" min={0} value={1} max={99} step={1} /> */}
-                      {/* <button type="button" onClick={onHandleQuantity}>+</button> */}
-                      {/* </div> */}
-                      <p className={s.price}>{price}</p>
+
+                      <div>
+                        <button onClick={() => onDecrement(order.id)} type="button">-</button>
+
+                        <span className={s.item_counter}>{order.counter}</span>
+
+                        <button onClick={() => onIncrement(order.id)} type="button">+</button>
+                      </div>
+
+                      <p className={s.price}>{(order.price * order.counter).toFixed(2)}</p>
+
                     </div>
 
                   </li>
                 );
               })}
           </ul>
+
         </div>}
 
 

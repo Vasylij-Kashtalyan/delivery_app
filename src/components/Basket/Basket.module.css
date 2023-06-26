@@ -50,10 +50,28 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  padding: 10px;
 }
 
 .item_box_btn{
   margin-left: auto;
   border: none;
-  padding: 10px;
 }
+
+.item_counter{
+  border-radius: 10px;
+  display: inline;
+  border: 1px solid tomato;
+  padding: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+

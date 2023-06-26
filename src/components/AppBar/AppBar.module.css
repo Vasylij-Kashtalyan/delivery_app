@@ -4,15 +4,16 @@
   align-items: center;
   min-height: 90px;
   border-bottom: 1px solid #000;
-  background-color: tomato;
+  background-color: #3e77aa; ;
   width: 100%;
 }
 .header_basket {
   position: relative;
   display: flex;
 }
+
 .header h1 {
-  color: #221c1c;
+  color: #221f1f;
 }
 .header img {
   width: 24px;

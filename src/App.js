@@ -13,15 +13,13 @@ function App() {
     const [idTarget, setIdTarget] = useState("");
 
     const counterOrder = orders.length;
-
+    console.log("products", products);
     useEffect(() => {
         try {
             const getAllProduct = async () => {
                 const data = await fetchProduct();
-
                 setProducts(data);
             };
-
             getAllProduct();
         } catch (error) {
             console.log(error);
@@ -34,7 +32,7 @@ function App() {
     }
 
     const filterById = products
-        .filter((pokemon) => pokemon.id === Number(idTarget))
+        .filter((pokemon) => pokemon.id === idTarget)
         .map((item) => item.products)
         .flat();
 
@@ -45,7 +43,7 @@ function App() {
             if (el.id === item.id) isInArray = true;
         });
 
-        if (!isInArray) setOrders([...orders, item]);
+        if (!isInArray) setOrders((orders) => [...orders, item]);
     }
 
     function onDelete(id) {
@@ -77,7 +75,11 @@ function App() {
                             exact="true"
                             path="/basket"
                             element={
-                                <Basket onDelete={onDelete} orders={orders} />
+                                <Basket
+                                    onDelete={onDelete}
+                                    orders={orders}
+                                    setOrders={setOrders}
+                                />
                             }
                         />
                     </Routes>

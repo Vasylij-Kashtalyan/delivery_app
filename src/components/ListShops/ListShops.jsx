@@ -3,15 +3,15 @@ import s from "./ListShops.module.css";
 const ListShops = ({ products, onHandler, idTarget, filterById, addBacket }) => {
     return (
         <div className={s.container}>
-            <ul className={s.box}>
+            <ul className={s.list}>
                 {products.map(({ name, id }) => {
                     return (
-                        <li key={id} className={s.box_list} >
-                            <h2>{name}</h2>
+                        <li key={id} className={s.list_item} >
+                            <h2 className={s.item_name}>{name}</h2>
 
                             <button
                                 id={id}
-                                className={s.box_btn}
+                                className={s.item_btn}
                                 onClick={onHandler}
                             >
                                 View Products
@@ -21,22 +21,21 @@ const ListShops = ({ products, onHandler, idTarget, filterById, addBacket }) => 
                 })}
             </ul>
 
-            <ul className={s.box}>
+            <ul className={s.list}>
                 {idTarget &&
                     filterById.map((item) => {
                         return (
-                            <li className={`${s.box_list} ${s.box_list__util}`} key={item.id}>
+                            <li className={`${s.list_item} ${s.list_item__util}`} key={item.id}>
 
-                                <h3>{item.name}</h3>
+                                <h3 className={s.item_name}>{item.name}</h3>
 
                                 <img
-                                    className={s.box.img}
                                     src={item.imageUrl}
                                     alt={item.name}
                                     loading="lazy"
                                 />
 
-                                <div className={s.box_add}>
+                                <div className={s.item_box}>
                                     <span className={s.box_price}>{item.price}</span>
 
                                     <button
