@@ -61,7 +61,7 @@
 .item_counter{
   border-radius: 10px;
   display: inline;
-  border: 1px solid tomato;
+  border: 1px solid #3e77aa;
   padding: 15px;
   margin-left: 5px;
   margin-right: 5px;
@@ -69,8 +69,20 @@
 
 
 
+.iconDelete{
+  width: 32px;
+  height: 32px;
+  fill: #3e77aa
+}
+.iconDelete:hover{
+  fill:tomato
+}
 
-
+.btn_delete{
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+}
 
 
 

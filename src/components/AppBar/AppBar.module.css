@@ -4,7 +4,7 @@
   align-items: center;
   min-height: 90px;
   border-bottom: 1px solid #000;
-  background-color: #3e77aa; ;
+  background-color: #221f1f; ;
   width: 100%;
 }
 .header_basket {
@@ -13,8 +13,12 @@
 }
 
 .header h1 {
-  color: #221f1f;
+  color: #fff;
 }
+.header h1:hover {
+  color: #4096e3;
+}
+
 .header img {
   width: 24px;
   height: 24px;
@@ -40,4 +44,13 @@
 
 .link {
   text-decoration: none;
+}
+.iconCart{
+  fill: #fff;
+  width: 32px;
+  height: 32px;
+} 
+
+.iconCart:hover { 
+ fill: #4096e3;
 }
