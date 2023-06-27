@@ -1,16 +1,31 @@
+import { useState } from "react";
 import s from "./Basket.module.css"
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
 
 const Basket = ({ orders, onDelete, setOrders }) => {
+  const [allTotal, setAllTotal] = useState(0)
+
+  useEffect(() => {
+    setAllTotal({
+      price: orders.reduce((prev, curr) => prev + curr.totalPrice, 0)
+    })
+  }, [orders])
+
 
   const onIncrement = (id) => {
     setOrders(orders => {
       return orders.map(product => {
         if (product.id === id) {
+
           return {
             ...product,
             counter: product.counter + 1,
+            totalPrice: (product.counter + 1) * product.price,
           }
         }
+
         return product;
       })
     })
@@ -21,11 +36,10 @@ const Basket = ({ orders, onDelete, setOrders }) => {
       return orders.map(product => {
         if (product.id === id) {
 
-          if (product.counter < 1) onDelete(product.id);
-
           return {
             ...product,
-            counter: product.counter - 1,
+            counter: product.counter - 1 > 1 ? product.counter - 1 : 1,
+            totalPrice: (product.counter - 1 > 1 ? product.counter - 1 : 1) * product.price,
           }
         }
 
@@ -34,6 +48,7 @@ const Basket = ({ orders, onDelete, setOrders }) => {
     })
   }
 
+  const { price } = allTotal
 
   return (
     <div className={s.container}>
@@ -41,17 +56,23 @@ const Basket = ({ orders, onDelete, setOrders }) => {
       {orders.length === 0
         ?
         <div className={s.container_title}>
-          <h1>Кошик порожній</h1>
-          <p>Але це можливо виправити :)</p>
+          <h1>The basket is empty</h1>
+          <p>But it can be fixed :)</p>
         </div>
 
-        : <div>
+        : <div className={s.container_box}>
 
           <ul className={s.list}>
             {orders &&
               orders.map(order => {
+
+
+
                 return (
                   <li className={s.list_item} key={order.id}>
+
+
+
 
                     <div className={s.item_box}>
 
@@ -80,11 +101,12 @@ const Basket = ({ orders, onDelete, setOrders }) => {
                           </svg>
                         </button>
                       </div>
+
                     </div>
 
                     <div className={s.item_price}>
 
-                      <div>
+                      <div className={s.item_box_counter}>
                         <button className={s.btn_delete} onClick={() => onDecrement(order.id)} type="button">-</button>
 
                         <span className={s.item_counter}>{order.counter}</span>
@@ -92,19 +114,27 @@ const Basket = ({ orders, onDelete, setOrders }) => {
                         <button className={s.btn_delete} onClick={() => onIncrement(order.id)} type="button">+</button>
                       </div>
 
-                      <p className={s.price}>{(order.price * order.counter).toFixed(2)}</p>
+                      <span className={s.price}>{(order.totalPrice).toFixed(2)}</span>
 
                     </div>
+
 
                   </li>
                 );
               })}
           </ul>
 
+
+
+          <div className={s.container_box_order}>
+            <div className={s.box_order_allTotal}>{price}</div >
+            <Link to="/order">
+              <button className={s.box_order_btn}>To order </button>
+            </Link>
+          </div>
+
         </div>}
-
-
-    </div>
+    </div >
   );
 };
 

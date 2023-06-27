@@ -82,6 +82,13 @@ function App() {
                                 />
                             }
                         />
+
+                        <Route
+                            path="/order"
+                            element={
+                                <h1>Thank you for your order, delicious))</h1>
+                            }
+                        />
                     </Routes>
                 </Suspense>
             </Container>

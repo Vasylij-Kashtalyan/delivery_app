@@ -4,6 +4,14 @@
   margin-right: auto;
 }
 
+.container_box{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.list{
+  padding: 0;
+}
 .list_item {
   text-align: center;
   margin-bottom: 20px;
@@ -21,16 +29,23 @@
   display: flex;
   color: black;
   text-align: left;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .item_price{
   margin-left: auto;
-  padding: 10px;
+  padding: 10px 0 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item_box_counter{
+  display: flex;
+  margin-right: 110px;
 }
   
 .price{
+  width: 75px;
   color: green;
   font-size: 24px;
 }
@@ -44,7 +59,7 @@
   width: 96px;
   height: 96px;
   margin-right: 16px;
- }
+}
 
 .item_box{
   width: 100%;
@@ -59,6 +74,7 @@
 }
 
 .item_counter{
+  width: 50px;
   border-radius: 10px;
   display: inline;
   border: 1px solid #3e77aa;
@@ -67,13 +83,12 @@
   margin-right: 5px;
 }
 
-
-
 .iconDelete{
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   fill: #3e77aa
 }
+
 .iconDelete:hover{
   fill:tomato
 }
@@ -83,6 +98,38 @@
   background-color: inherit;
   cursor: pointer;
 }
+
+.container_box_order{
+  padding: 17px;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  margin-top: 15px;
+  background-color: #00a0461a;
+  border: 1px solid #00a046;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.box_order_allTotal{
+  font-size: 24px;
+  margin-right: 25px;
+}
+
+.box_order_btn{
+  padding: 15px;
+  width: 110px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #00a046;
+  cursor: pointer;
+}
+
+.box_order_btn:hover{
+  background-color: #00bc52;
+}
+
 
 
 
