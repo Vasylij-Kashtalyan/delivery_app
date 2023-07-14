@@ -12,8 +12,11 @@ function App() {
     const [orders, setOrders] = useState([]);
     const [idTarget, setIdTarget] = useState("");
 
+    console.log("idTarget", idTarget);
+
     const counterOrder = orders.length;
     console.log("products", products);
+
     useEffect(() => {
         try {
             const getAllProduct = async () => {
@@ -32,7 +35,7 @@ function App() {
     }
 
     const filterById = products
-        .filter((pokemon) => pokemon.id === idTarget)
+        .filter((pokemon) => pokemon._id === idTarget)
         .map((item) => item.products)
         .flat();
 
@@ -55,8 +58,8 @@ function App() {
         <>
             <AppBar counterOrder={counterOrder} />
             <Container>
-                {products.length === 0 && <Loader />}
                 <Suspense>
+                    {products.length === 0 && <Loader />}
                     <Routes>
                         <Route
                             exact="true"

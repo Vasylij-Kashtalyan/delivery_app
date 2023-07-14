@@ -4,13 +4,13 @@ const ListShops = ({ products, onHandler, idTarget, filterById, addBacket }) => 
     return (
         <div className={s.container}>
             <ul className={s.list}>
-                {products.map(({ name, id }) => {
+                {products.map(({ name, _id }) => {
                     return (
-                        <li key={id} className={s.list_item} >
+                        <li key={_id} className={s.list_item} >
                             <h2 className={s.item_name}>{name}</h2>
 
                             <button
-                                id={id}
+                                id={_id}
                                 className={s.item_btn}
                                 onClick={onHandler}
                             >
@@ -26,7 +26,6 @@ const ListShops = ({ products, onHandler, idTarget, filterById, addBacket }) => 
                     filterById.map((item) => {
                         return (
                             <li className={`${s.list_item} ${s.list_item__util}`} key={item.id}>
-
                                 <h3 className={s.item_name}>{item.name}</h3>
 
                                 <img

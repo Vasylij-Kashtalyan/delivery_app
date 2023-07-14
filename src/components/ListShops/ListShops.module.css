@@ -11,12 +11,29 @@ li {
   justify-content: center;
 }
 .list {
+  /* max-width: 1170px; */
+    /* min-width: 320px; */
   display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     
 }
+/*   */
+/* @media screen and (min-width: 480px ) { */
+  /* .list { */
+      /* flex-direction: row; */
+      /* flex-wrap: wrap; */
+      /* gap: 10px; */
+    /* } */
+/*    */
+    /* .list_item { */
+      /* flex-basis: calc((100% - 10px) / 2); */
+      /* font-size: 12px; */
+    /* } */
+/* } */
+/*  */
+
 .list_item {
   justify-content: center;
   justify-items: center;
