@@ -35,7 +35,7 @@ function App() {
     }
 
     const filterById = products
-        .filter((pokemon) => pokemon._id === idTarget)
+        .filter(({ _id }) => _id === idTarget)
         .map((item) => item.products)
         .flat();
 
