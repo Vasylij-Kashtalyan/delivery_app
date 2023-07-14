@@ -10,6 +10,7 @@ const ListShops = ({ products, onHandler, idTarget, filterById, addBacket }) => 
                             <h2 className={s.item_name}>{name}</h2>
 
                             <button
+                                name={name}
                                 id={_id}
                                 className={s.item_btn}
                                 onClick={onHandler}

@@ -30,12 +30,12 @@ function App() {
     }, []);
 
     function onHandler(evt) {
-        const idTarget = evt.currentTarget.id;
+        const idTarget = evt.currentTarget.name;
         setIdTarget(idTarget);
     }
 
     const filterById = products
-        .filter(({ _id }) => _id === idTarget)
+        .filter(({ name }) => name === idTarget)
         .map((item) => item.products)
         .flat();
 
