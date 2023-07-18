@@ -1,4 +1,4 @@
-Backend  <a href="https://github.com/Vasylij-Kashtalyan/back_delivery_app">ther</a>
+Backend  <a href="https://github.com/Vasylij-Kashtalyan/back_delivery_app">there</a>
 
 # Getting Started with Create React App
 
